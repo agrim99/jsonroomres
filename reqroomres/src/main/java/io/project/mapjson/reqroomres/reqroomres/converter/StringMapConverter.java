@@ -47,7 +47,6 @@ public class StringMapConverter implements AttributeConverter<Map<String, Double
 
         try{
             return mapper.readValue(occupancy_to_price, new TypeReference<Map<String, Double>>() {});
-            // check to override functions of typereference
         }catch(IOException e){
             throw new IllegalArgumentException("Error converting JSON to map", e);
 

@@ -11,8 +11,8 @@ public class RoomReservationRequest {
 
     private Long hotel_id;
 
-    //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-    private String date;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+    private Date date;
 
     private String room_category_id;
 
@@ -23,13 +23,13 @@ public class RoomReservationRequest {
 
     }
 
-    public RoomReservationRequest(Long hotel_id, String date, String room_category_id) {
+    public RoomReservationRequest(Long hotel_id, Date date, String room_category_id) {
         this.hotel_id = hotel_id;
         this.date = date;
         this.room_category_id = room_category_id;
     }
 
-    public RoomReservationRequest(Long hotel_id, String date, String room_category_id, Integer occupancy) {
+    public RoomReservationRequest(Long hotel_id, Date date, String room_category_id, Integer occupancy) {
         this.hotel_id = hotel_id;
         this.date = date;
         this.room_category_id = room_category_id;
@@ -44,11 +44,11 @@ public class RoomReservationRequest {
         this.hotel_id = hotel_id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

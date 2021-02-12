@@ -15,21 +15,9 @@ import java.util.Map;
 public interface RoomReservationRepository extends JpaRepository<RoomReservation, Long> {
 
 
-    //@Query(value = "INSERT INTO room_reservations (hotel_id, date, occupancy_to_price, room_category_id) VALUES (:hotel_id, :date, :occupancy_to_price, :room_category_id)", nativeQuery = true)
-    //void savePrice(Long hotel_id, String date, String occupancy_to_price, String room_category_id);
-
-    // CAST(occupancy_to_price as varchar)
-
-
     @Transactional
     @Query(value = "SELECT CAST(occupancy_to_price as varchar) FROM room_reservations WHERE hotel_id=:hotel_id AND date=:date AND room_category_id=:room_category_id", nativeQuery = true)
     List<String> getPrice(Long hotel_id, Date date, String room_category_id);
-
-
-//    @Modifying
-//    @Transactional
-//    @Query(value = "UPDATE room_reservations SET occupancy_to_price=:occupancy_to_price WHERE hotel_id=:hotel_id AND date=:date AND room_category_id=:room_category_id", nativeQuery = true)
-//    void updatePrice(Long hotel_id, Date date, String room_category_id, Map<String, Double> occupancy_to_price);
 
 
     @Modifying
