@@ -135,11 +135,12 @@ public class RoomReservationController {
         roomReservationRepository.deleterow(roomReservation.getHotel_id(), roomReservation.getDate(),
                 roomReservation.getRoom_category_id());
 
+        roomReservationRepository.save(roomReservation);
+
         if(map.containsKey(roomReservation.getKeyForCache())){
             map.put(roomReservation.getKeyForCache(), roomReservation.getOccupancy_to_price());
         }
 
-        roomReservationRepository.save(roomReservation);
 
         return "Updated Successfully";
 
