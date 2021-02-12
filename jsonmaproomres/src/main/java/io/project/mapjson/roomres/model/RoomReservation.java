@@ -1,5 +1,6 @@
 package io.project.mapjson.roomres.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.project.mapjson.roomres.converter.StringMapConverter;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class RoomReservation {
     private Long hotel_id;
 
     @Column(name = "date")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date date;
 
     @Column(name = "room_category_id")
