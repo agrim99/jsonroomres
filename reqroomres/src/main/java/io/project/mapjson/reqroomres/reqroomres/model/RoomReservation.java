@@ -3,11 +3,15 @@ package io.project.mapjson.reqroomres.reqroomres.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.project.mapjson.reqroomres.reqroomres.converter.StringMapConverter;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Map;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "room_reservations")
@@ -17,19 +21,24 @@ public class RoomReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Min(value = 1,message = "hotel_id should be greater than 0")
+    @NotNull(message ="Hotel Id is required")
     @Column(name = "hotel_id")
-    private Long hotel_id;
+    private Long hotelId;
 
-    @Column(name = "date")
+
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private Date date;
 
+    @Min(value = 1,message = "Room_Category_Id should be greater than 0")
+    @NotNull(message="Room_Category_Id is required")
+    @Column(name = "date")
     @Column(name = "room_category_id")
-    private String room_category_id;
+    private String roomCategoryId;
 
     @Column(name = "occupancy_to_price", columnDefinition = "JSON")
     @Convert(converter = StringMapConverter.class)
-    private Map<String, Double> occupancy_to_price;
+    private Map<String, Double> occupancyToPrice;
 
 
 
@@ -37,12 +46,19 @@ public class RoomReservation {
 
     }
 
-
-    public RoomReservation(Long hotel_id, Date date, String room_category_id, Map<String, Double> occupancy_to_price) {
-        this.hotel_id = hotel_id;
+    public RoomReservation(Long hotelId, Date date, String roomCategoryId, Map<String, Double> occupancyToPrice) {
+        this.hotelId = hotelId;
         this.date = date;
-        this.room_category_id = room_category_id;
-        this.occupancy_to_price = occupancy_to_price;
+        this.roomCategoryId = roomCategoryId;
+        this.occupancyToPrice = occupancyToPrice;
+    }
+
+    public RoomReservation(Long id, Long hotelId, Date date, String roomCategoryId, Map<String, Double> occupancyToPrice) {
+        this.id = id;
+        this.hotelId = hotelId;
+        this.date = date;
+        this.roomCategoryId = roomCategoryId;
+        this.occupancyToPrice = occupancyToPrice;
     }
 
     public Long getId() {
@@ -53,12 +69,12 @@ public class RoomReservation {
         this.id = id;
     }
 
-    public Long getHotel_id() {
-        return hotel_id;
+    public Long getHotelId() {
+        return hotelId;
     }
 
-    public void setHotel_id(Long hotel_id) {
-        this.hotel_id = hotel_id;
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 
     public Date getDate() {
@@ -69,25 +85,25 @@ public class RoomReservation {
         this.date = date;
     }
 
-    public String getRoom_category_id() {
-        return room_category_id;
+    public String getRoomCategoryId() {
+        return roomCategoryId;
     }
 
-    public void setRoom_category_id(String room_category_id) {
-        this.room_category_id = room_category_id;
+    public void setRoomCategoryId(String roomCategoryId) {
+        this.roomCategoryId = roomCategoryId;
     }
 
-    public Map<String, Double> getOccupancy_to_price() {
-        return occupancy_to_price;
+    public Map<String, Double> getOccupancyToPrice() {
+        return occupancyToPrice;
     }
 
-    public void setOccupancy_to_price(Map<String, Double> occupancy_to_price) {
-        this.occupancy_to_price = occupancy_to_price;
+    public void setOccupancyToPrice(Map<String, Double> occupancyToPrice) {
+        this.occupancyToPrice = occupancyToPrice;
     }
 
     public String getKeyForCache() {
 
-        return hotel_id.toString() + "@" + date.toString() + "@" + room_category_id;
+        return hotelId.toString() + "@" + date.toString() + "@" + roomCategoryId;
 
     }
 

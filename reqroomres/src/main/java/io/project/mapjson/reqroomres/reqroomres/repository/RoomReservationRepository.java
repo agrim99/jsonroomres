@@ -16,20 +16,20 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
 
 
     @Transactional
-    @Query(value = "SELECT CAST(occupancy_to_price as varchar) FROM room_reservations WHERE hotel_id=:hotel_id AND date=:date AND room_category_id=:room_category_id", nativeQuery = true)
-    List<String> getPrice(Long hotel_id, Date date, String room_category_id);
+    @Query(value = "SELECT CAST(occupancy_to_price as varchar) FROM room_reservations WHERE hotel_id=:hotelId AND date=:date AND room_category_id=:roomCategoryId", nativeQuery = true)
+    List<String> getPrice(Long hotelId, Date date, String roomCategoryId);
 
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE room_reservations SET occupancy_to_price=:occupancy_to_price WHERE hotel_id=:hotel_id AND date=:date AND room_category_id=:room_category_id", nativeQuery = true)
-    void updatePrice(Long hotel_id, Date date, String room_category_id, Map<String, Double> occupancy_to_price);
+    @Query(value = "UPDATE room_reservations SET occupancy_to_price=:occupancyToPrice WHERE hotel_id=:hotelId AND date=:date AND room_category_id=:roomCategoryId", nativeQuery = true)
+    void updatePrice(Long hotelId, Date date, String roomCategoryId, Map<String, Double> occupancyToPrice);
 
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM room_reservations WHERE hotel_id=:hotel_id AND date=:date AND room_category_id=:room_category_id", nativeQuery = true)
-    void deleterow(Long hotel_id, Date date, String room_category_id);
+    @Query(value = "DELETE FROM room_reservations WHERE hotel_id=:hotelId AND date=:date AND room_category_id=:roomCategoryId", nativeQuery = true)
+    void deleterow(Long hotelId, Date date, String roomCategoryId);
 
 
 }
